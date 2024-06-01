@@ -1,0 +1,83 @@
+<ng-container *ngFor="let scarpa of scarpa">
+<div class="container mt-5 mb-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="images p-3">
+                            <div class="text-center p-4"> <img id="main-image" src={{scarpa.immagine}} width="250" /> </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product p-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center"><a [routerLink]="['/Prodotti']"><i class="fa fa-long-arrow-left"></i><span class="ml-1"> Torna ai prodotti</span></a>
+                                </div>
+                                <span *ngIf="scarpa.nuovo_arrivo" class="full brand fs-4"><i class="fas fa-bolt"></i>Novità</span>
+                            </div>
+                            <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand">{{scarpa.categoria}}</span>
+                                <h5 class="text-uppercase">{{scarpa.nome}}</h5>
+                                <div class="price d-flex flex-row align-items-center">
+                                    <p class="fa fa-star" [ngClass]="{'full': scarpa.best_seller>=1}"  data-rating="1"></p>
+                                    <p class="fa fa-star " [ngClass]="{'full': scarpa.best_seller>=2}" data-rating="2"></p>
+                                    <p class="fa fa-star" [ngClass]="{'full': scarpa.best_seller>=3}" data-rating="3"></p>
+                                    <p class="fa fa-star" [ngClass]="{'full': scarpa.best_seller>=4}" data-rating="4"></p>
+                                    <p class="fa fa-star" [ngClass]="{'full': scarpa.best_seller>=5}" data-rating="5"></p>
+                                </div>
+                                <div class="price d-flex flex-row align-items-center"> <span class="act-price">{{scarpa.prezzo | currency:"EUR"}}</span>
+                                </div>
+                            </div>
+                            <p class="about">{{scarpa.descrizione}}</p>
+                            <form action="#" [formGroup]="buyForm" (ngSubmit)="submit()">
+                                <div class="mt-5 color">
+                                    <h6 class="text-uppercase">Colori disponibili</h6>
+                                    <h6 *ngIf="colorInvalid" class="text-danger">Seleziona un colore</h6>
+                                    <div class="colori">
+                                        <ng-container *ngFor="let colore of coloriScarpe()">
+                                        <div>
+                                            <input type="radio" id="{{colore.nome}}" name="colore" value="{{colore.nome}}" (change)="selectColore(colore.nome)">
+                                            <label class="colorLabel" for="{{colore.nome}}" title="{{colore.nome}}" [ngStyle]="{'background': colore.hex}"></label>    
+                                        </div>
+                                        </ng-container>
+                                    </div>
+                                </div> 
+                                <div class="sizes mt-4">
+                                    <h6 class="text-uppercase">Taglie disponibili</h6> 
+                                    <h6 *ngIf="tagInvalid" class="text-danger">Seleziona una taglia</h6>
+                                    <div class="taglie">
+                                        <ng-container *ngFor="let taglia of scarpa.taglie_disponibili">
+                                            <div class="marginB_03">
+                                                <input type="radio" id="T{{taglia}}" name="taglia" value="{{taglia}}" (change)="selectTaglia(taglia)">
+                                                <label class="btn btn-dark btn-sm" for="T{{taglia}}" title="T-{{taglia}}" >{{taglia}}</label>
+                                            </div> 
+                                    </ng-container>
+                                    </div>
+                                </div>  
+                                <div class="mt-4 apply">
+                                    <div class="quantita">
+                                        <label for="quantita">
+                                            <p class="fas fa-minus" (click)="decremento()"></p>
+                                            <input type="number" formControlName="quantita" [min]="1" [max]="10" (change)="controllaQuantita()">
+                                            <p class="fas fa-plus" (click)="incremento()"></p>
+                                        </label>
+                                        <div>
+                                            <button type="submit" class="btn btn-dark">Acquista</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</ng-container>
+
+<app-popupcart 
+    [product]="prodotto"
+    (openCartEmitter)="changeOpenCart($event)"
+    *ngIf="openPopUp == true">
+</app-popupcart>

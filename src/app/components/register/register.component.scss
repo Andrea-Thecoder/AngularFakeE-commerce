@@ -1,0 +1,49 @@
+@use "../../style/utilities/mixin" as mix ;
+@use "../../style/utilities/color" as col;
+@use "../../style/utilities/var" as var;
+
+
+
+:host {
+    padding: 1.5em;
+    
+}
+
+h4{
+    text-align: center;
+}
+
+form {
+    padding: 1em;
+    background-color: #EEEEEE;
+    max-width: 300px;
+
+    input[type="checkbox"]:checked{
+        @include mix.CheckBoxChecked();
+    }
+    .button-container{
+        @include mix.FlexStandard(center);
+    }
+    .img-container{
+        @include mix.FlexStandard(center);
+        max-width: 300px;
+        img {
+            width: 80%;
+            padding: 2em;
+        }
+    }
+    .input-inner {
+        @include mix.FlexStandard(center);
+        gap: 1em;
+        flex-direction: row;
+    }
+
+    p {
+        font-size: 0.7rem;
+        margin: 0;
+        padding: 0 1em 0.5em;
+        &.normal{
+            font-size: 1rem;
+        }
+    }
+}

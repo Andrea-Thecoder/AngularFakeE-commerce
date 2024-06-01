@@ -1,0 +1,81 @@
+@use "../../style/utilities/mixin" as mix ;
+@use "../../style/utilities/color" as col;
+@use "../../style/utilities/var" as var;
+
+
+
+$fontButton: 0.8rem;
+
+:host {
+    width: 100%;
+}
+
+a {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+h2{
+    text-align: center;
+    margin: 0;
+    padding: 0.5em;
+    border-bottom:1px solid col.$border-littleGrey;
+    border-radius: var.$border-radius;
+}
+
+.card-inner {
+    @include mix.FlexBurger();
+    .card-inner-detail{
+        @include mix.FlexStandard(space-between);
+        .card-inner-total{
+            margin:0 0.7em;
+        }
+    }
+}
+
+.button-zone{
+    @include mix.FlexBurger();
+    gap: 0.5em;
+    button {
+        a {
+            font-size:$fontButton;
+        }
+        font-size: $fontButton;
+        width: 75%;
+    }
+    #paypal-button {
+        background-color: #ffd600;
+    }
+}
+
+@media screen and (min-width: 768px) {
+
+    $fontButton: 1rem;
+
+    .card-inner {
+        @include mix.FlexStandard(space-between);
+        flex-direction: row;
+        .card-inner-imgText{
+            display: flex;
+            align-items: center;
+        }
+
+    }
+
+    .button-zone{
+        button {
+            a {
+                font-size:$fontButton;
+            }
+            font-size: $fontButton;
+        }
+    }
+}
+
+
+
+
+
+.link:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,273 @@
+@use "../../style/utilities/mixin" as mix ;
+@use "../../style/utilities/color" as col;
+@use "../../style/utilities/var" as var;
+
+
+/*#region Variabili del componente */
+/*#endregion Variabili del componente */
+
+:host {
+    width: 100%;
+    @include mix.FlexBurger(true);
+    justify-content:flex-start;
+   
+}
+
+#centralZone {
+    position: relative;
+    @include mix.FlexStandard(space-between);
+    #logo{
+        padding: 0.5em;
+        width: 40%;
+        margin-left: 0.5rem;
+    }
+    #navbar{
+        ul{
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            z-index:100; 
+            background-color: white;
+            @include mix.FlexBurger(true);
+            gap: 0.2em;
+            li {
+                width: 100%;
+                padding: 0.1em;
+                text-align: center;
+                font-weight: var.$standard-Weight;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+            ul {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index:100;
+                min-height: 150px; 
+                border: 1px solid rgba(128, 128, 128, 0.386);
+                background-color: col.$bg-Header;
+            }
+            
+        }
+    }
+    #searchbar{
+        @include mix.FlexStandard;
+        gap: 2em;
+        #search{
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: col.$bg-Header;
+            width: 100%;
+            height: 100%;
+            padding: 1em;
+            @include mix.FlexStandard(center);
+            gap: 1em;
+            div.close {
+                cursor: pointer;
+                font-size: var.$font-icon-size;
+            }
+        }
+        #cart-wish {
+            @include mix.FlexStandard();
+            gap: 2em;
+            margin-right: 0.5em;
+            a{
+                font-size: var.$font-icon-size;
+            }
+            .search{
+                font-size: var.$font-icon-size;
+                cursor: pointer;
+            }
+            .menu{
+                font-size: var.$font-icon-size;
+                input {
+                    display: none;
+                }
+                label {
+                    cursor:pointer;
+                }
+               
+            }
+            
+            }
+        }
+}
+
+
+#lowerZone{
+    width: 100%;
+    min-height: 95px;
+    border-top: 1px solid col.$border-littleGrey;
+    border-radius: var.$border-radius;
+    background-color: col.$bg-Header;
+    @include mix.FlexStandard(center);
+    overflow: hidden;
+    
+    #advert {
+        @include mix.FlexStandard(center);
+        p {
+            text-align: center;
+            margin: 0;
+            line-height: 1.5;
+        }
+        a{
+            text-decoration: underline;
+        }
+    }
+}
+
+
+@media screen and (min-width: 768px){
+
+:host {
+    background: col.$bg-Header;
+    background: col.$bg-Header-gradient;
+}
+
+
+#upperZone { 
+margin: 0.5em 1em;
+@include mix.FlexStandard(space-between);
+    #bottleft-list, #navright-list {
+        @include mix.FlexStandard(center);
+    }
+    #bottleft-list{
+       gap: 1em; 
+    }
+    
+    #navright-list {
+        li {
+            border-right: 0.15em solid black;
+            padding: 0 0.5em;
+            &:last-of-type {
+                border-right: none;
+                margin-right: 0.1em;
+            }
+            a:hover {
+                color: col.$a-hover;
+            }
+        }
+    }
+}
+
+#centralZone {
+    #logo {
+        width: 10%;
+        margin-left: 1em;
+    }
+    
+    #navbar{
+        width: 50%;
+        ul{
+            @include mix.FlexStandard(space-between);
+            flex-direction: row;
+            position: static;
+            background-color: transparent;
+            li{
+                width: auto;
+            }
+            li:hover {
+                text-decoration: underline;
+                font-weight: var.$standard-Weight;
+                }
+            ul {
+                width: 100%;
+                display: flex;
+                top:100%;
+                background-color: col.$bg-Header;
+                justify-content: center;
+                align-items: center;
+
+                div{
+                    width: 80%;
+                    @include mix.FlexStandard(space-between);
+                    align-items: baseline;
+
+                    &.two-li{
+                        justify-content: center;
+                        gap:1em;
+                    }
+                
+                    li {
+                        width: 25%;
+                        margin: 0.5em 0;
+                        font-weight: var.$standard-Weight;
+                        &:hover{
+                            text-decoration: none;
+                        }
+                    }
+                    p {
+                        margin: 0;
+                        padding: 0;
+                        font-size: var.$p-menu;
+                        font-weight: 550;
+                        a{
+                            cursor: pointer;
+                        }
+                    }
+                   
+                }
+                
+            }
+        }
+    }
+
+    #searchbar {
+        gap: 1em;
+        #search {
+            position: static;
+            padding: 0;
+            padding-right:2em;
+            padding-left: 1em;
+            display: block;
+            background-color: none;
+
+            input {
+                &:hover {
+                    color: #495057;
+                    background-color: #fff;
+                    border-color: #80bdff;
+                    outline: 0;
+                    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+                }
+            }
+        }
+
+        #cart-wish {
+            margin-right: 1.5em;
+        }
+    }
+}
+
+
+#lowerZone {
+    background-color: transparent;
+}
+}
+
+.badge{
+    font-size: 0.5rem;
+}
+
+
+
+/*#region animation for slider */
+.slide-in-right {
+	animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-right {
+    0% {
+      transform: translateX(1000px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+/*#endregion animation for slider */

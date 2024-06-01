@@ -1,0 +1,368 @@
+    <ng-container *ngIf="configServices.getResize()">
+    <div id="upperZone">
+        <div id="bottleft">
+            <ul id="bottleft-list">
+                <li>
+                    <a href="javascript:void(0)" title="Jordan">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2z" fill="#000"/>
+                          </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" title="Member">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0" y="0" width="24" height="24" fill="#000"/>
+                          </svg>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="navright">
+            <ul id="navright-list" class="f0_7"> 
+                <li><a href="https://www.google.it/maps">Trova Negozio</a></li>
+                <li><a href="javascript:void(0)">Aiuto</a></li>
+                <li><a [routerLink]="['/Register']">Usciti a noi</a></li>
+                <li><a href="javascript:void(0)">Contattaci</a></li>
+                <li><a [routerLink]="['/Account']">Accedi</a></li>
+            </ul>
+        </div>
+    </div>
+    </ng-container>
+    <div id="centralZone">
+        <div id="logo">
+            <a [routerLink]="['/Home']"><img src={{utilities.logourl}} alt="logo LabAir" title="LabAir"></a>
+        </div>
+        
+        <div id="navbar" >
+            <ul class="menu" *ngIf="menuActive" >
+                <li (mouseenter)="apriMenu(1)" (mouseenter)="stopClearTime()" (mouseleave)="startClearTime()">
+                    <a [routerLink]="['/Prodotti']" (click)="apriMenu(0)">Novità e in Evidenza</a>
+                    <ul *ngIf="menuSwitch==1" (mouseleave)="apriMenu(0)">
+                        <div>
+                        <li>
+                            <a [routerLink]="['/Prodotti/Best_seller','4']" (click)="apriMenu(-1)" class="bold">In Evidenza</a>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <br>
+                            <p><a [routerLink]="['/Prodotti/Nuovo_arrivo','true']" (click)="apriMenu(-1)">Tutti i nuovi arrivi</a></p>
+                            <p><a [routerLink]="['/Prodotti/Best_seller','4']" (click)="apriMenu(-1)">Best Seller</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">MemberShip</a></p>
+                            </ng-container>
+                       </li>
+                        <li><a [routerLink]="['/Prodotti/Best_seller','5']" (click)="apriMenu(-1)" class="bold">Scopri le Icone</a>
+                            <br>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <p><a [routerLink]="['/Prodotti/Nome','Air Force 1']" (click)="apriMenu(-1)" >Air Force 1</a></p>
+                            <p><a [routerLink]="['/Prodotti/Nome','Air Jordan 1']" (click)="apriMenu(-1)">Air Jordan 1</a></p>
+                            <p><a [routerLink]="['/Prodotti/Nome','Air Max']" (click)="apriMenu(-1)">Air Max</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Dunk</a></p>
+                            <p><a [routerLink]="['/Prodotti/Nome','Blazer']" (click)="apriMenu(-1)">Blazer</a></p>
+                            <p><a [routerLink]="['/Prodotti/Nome','Pegasus']" (click)="apriMenu(-1)">Pegasus</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Mercurial</a></p>
+                        </ng-container>
+                        </li>
+                        <li><a [routerLink]="['/Prodotti']" (click)="apriMenu(0)" class="bold">Scopri lo Sport</a>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <br>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Calcio</a></p>
+                            <p><a [routerLink]="['/Prodotti','Running']" (click)="apriMenu(0)">Running</a></p>
+                            <p><a [routerLink]="['/Prodotti','Basket']" (click)="apriMenu(0)">Basket</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Fitness</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Golf</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Tennis</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Yoga</a></p>
+                            <p><a [routerLink]="['/Prodotti','Sneakers']" (click)="apriMenu(0)">Sneakers</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Skateboard</a></p>
+                            </ng-container>
+                        </li>
+                        <li><a [routerLink]="['/Prodotti/Best_seller','4']" class="bold">Di tendenza</a>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <br>
+                            <p><a [routerLink]="['/Prodotti/Nome','Air Max']" (click)="apriMenu(-1)">Air Max Home</a></p>
+                            <p><a [routerLink]="['/Prodotti','Sneakers']" (click)="apriMenu(-1)">Sneaker Y2K</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">LabAir Style</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">LabAir Style</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Golf Style</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Tennis Style</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Yoga Style</a></p>
+                            </ng-container>
+                        </li>
+                        <li *ngIf="!configServices.getResize()"><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)"><i *ngIf="!configServices.getResize()" class="fas fa-arrow-left"></i> Torna indietro</a></li>
+                    </div>
+                    </ul>
+                </li>
+                <li (mouseenter)="apriMenu(2)" (mouseenter)="stopClearTime()" (mouseleave)="startClearTime()">
+                    <a [routerLink]="['/Prodotti']" (click)="apriMenu(0)">Uomo</a>
+                    <ul *ngIf="menuSwitch==2" (mouseleave)="apriMenu(0)">
+                        <div>
+                        <li>
+                            <a [routerLink]="['/Prodotti/Best_seller','4']" (click)="apriMenu(-1)" class="bold">In Evidenza</a>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <br>
+                            <p><a [routerLink]="['/Prodotti/Nuovo_arrivo','true']" (click)="apriMenu(-1)">Tutti i nuovi arrivi</a></p>
+                            <p><a [routerLink]="['/Prodotti/Best_seller','4']" (click)="apriMenu(-1)">Best Seller</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">MemberShip</a></p>
+                            </ng-container>
+                       </li>
+                        <li><a [routerLink]="['/Prodotti']" (click)="apriMenu(-1)" class="bold">Scarpe</a>
+                            <br>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <p><a [routerLink]="['/Prodotti']" (click)="apriMenu(-1)" >Tutte le Scarpe</a></p>
+                            <p><a [routerLink]="['/Prodotti/Nome','Jordan']" (click)="apriMenu(-1)">Jordan</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Lifestyle</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Calcio</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">LabAir by You</a></p>
+                        </ng-container>
+                        </li>
+                        <li><a [routerLink]="['/Prodotti']" (click)="apriMenu(0)" class="bold">Scopri lo Sport</a>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <br>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Calcio</a></p>
+                            <p><a [routerLink]="['/Prodotti','Running']" (click)="apriMenu(0)">Running</a></p>
+                            <p><a [routerLink]="['/Prodotti','Basket']" (click)="apriMenu(0)">Basket</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Golf</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Tennis</a></p>
+                            <p><a [routerLink]="['/Prodotti','Sneakers']" (click)="apriMenu(0)">Sneakers</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Skateboard</a></p>
+                            </ng-container>
+                        </li>
+                        <li><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)" class="bold">Abbigliamento</a>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <br>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Tutto l'Abbigliamento</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)">Maglie e t-shirt</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)">Pantaloni e tute</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)">Felpe</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)">Shorts</a></p>
+                            </ng-container>
+                        </li>
+                        <li><a [routerLink]="['/Prodotti/Best_seller','4']" class="bold">Di tendenza</a>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <br>
+                            <p><a [routerLink]="['/Prodotti/Nome','Air Max']" (click)="apriMenu(-1)">Air Max Home</a></p>
+                            <p><a [routerLink]="['/Prodotti','Sneakers']" (click)="apriMenu(-1)">Sneaker Y2K</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">LabAir Style</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">LabAir Style</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Golf Style</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Tennis Style</a></p>
+                            </ng-container>
+                        </li>
+                        <li *ngIf="!configServices.getResize()"><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)"><i *ngIf="!configServices.getResize()" class="fas fa-arrow-left"></i> Torna indietro</a></li>
+                    </div>
+                    </ul>
+                </li>
+                <li (mouseenter)="apriMenu(3)" (mouseenter)="stopClearTime()" (mouseleave)="startClearTime()" > 
+                    <a [routerLink]="['/Prodotti']" (click)="apriMenu(0)">Donna</a>
+                    <ul *ngIf="menuSwitch==3" (mouseleave)="apriMenu(0)">
+                        <div>
+                        <li>
+                            <a [routerLink]="['/Prodotti/Best_seller','4']" (click)="apriMenu(-1)" class="bold">In Evidenza</a>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <br>
+                            <p><a [routerLink]="['/Prodotti/Nuovo_arrivo','true']" (click)="apriMenu(-1)">Tutti i nuovi arrivi</a></p>
+                            <p><a [routerLink]="['/Prodotti/Best_seller','4']" (click)="apriMenu(-1)">Best Seller</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">MemberShip</a></p>
+                            </ng-container>
+                       </li>
+                        <li><a [routerLink]="['/Prodotti']" (click)="apriMenu(-1)" class="bold">Scarpe</a>
+                            <br>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <p><a [routerLink]="['/Prodotti']" (click)="apriMenu(-1)" >Tutte le Scarpe</a></p>
+                            <p><a [routerLink]="['/Prodotti/Nome','Jordan']" (click)="apriMenu(-1)">Jordan</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Lifestyle</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Calcio</a></p>
+                            <p><a [routerLink]="['/Prodotti','Running']" (click)="apriMenu(-1)">Running</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">LabAir by You</a></p>
+                        </ng-container>
+                        </li>
+                        <li><a [routerLink]="['/Prodotti']" (click)="apriMenu(0)" class="bold">Scopri lo Sport</a>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <br>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Calcio</a></p>
+                            <p><a [routerLink]="['/Prodotti','Running']" (click)="apriMenu(0)">Running</a></p>
+                            <p><a [routerLink]="['/Prodotti','Basket']" (click)="apriMenu(0)">Basket</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Danza</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Tennis</a></p>
+                            <p><a [routerLink]="['/Prodotti','Sneakers']" (click)="apriMenu(0)">Sneakers</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Yoga</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Golf</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Fitness</a></p>
+                            </ng-container>
+                        </li>
+                        <li><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)" class="bold">Abbigliamento</a>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <br>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Tutto l'Abbigliamento</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)">Maglie e t-shirt</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)">Leggings e tute</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)">Felpe</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)">Shorts</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)">Reggiseni sportivi</a></p>
+                            </ng-container>
+                        </li>
+                        <li><a [routerLink]="['/Prodotti/Best_seller','4']" class="bold">Di tendenza</a>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <br>
+                            <p><a [routerLink]="['/Prodotti/Nome','Air Max']" (click)="apriMenu(-1)">Air Max Home</a></p>
+                            <p><a [routerLink]="['/Prodotti','Sneakers']" (click)="apriMenu(-1)">Sneaker Y2K</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">LabAir Style</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">LabAir Style</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Golf Style</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Tennis Style</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Yoga Style</a></p>
+                            </ng-container>
+                        </li>
+                        <li *ngIf="!configServices.getResize()"><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)"><i *ngIf="!configServices.getResize()" class="fas fa-arrow-left"></i> Torna indietro</a></li>
+                    </div>
+                    </ul>
+                </li>
+                <li (mouseenter)="apriMenu(4)" (mouseenter)="stopClearTime()" (mouseleave)="startClearTime()">
+                    <a [routerLink]="['/Prodotti']" (click)="apriMenu(0)">Kids</a>
+                    <ul *ngIf="menuSwitch==4" (mouseleave)="apriMenu(0)">
+                        <div>
+                        <li>
+                            <a [routerLink]="['/Prodotti/Best_seller','4']" (click)="apriMenu(-1)" class="bold">In Evidenza</a>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <br>
+                            <p><a [routerLink]="['/Prodotti/Nuovo_arrivo','true']" (click)="apriMenu(-1)">Tutti i nuovi arrivi</a></p>
+                            <p><a [routerLink]="['/Prodotti/Best_seller','4']" (click)="apriMenu(-1)">Best Seller</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">MemberShip</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Teenager</a></p>
+                            </ng-container>
+                       </li>
+                        <li><a [routerLink]="['/Prodotti']" (click)="apriMenu(-1)" class="bold">Scarpe</a>
+                            <br>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <p><a [routerLink]="['/Prodotti']" (click)="apriMenu(-1)" >Tutte le Scarpe</a></p>
+                            <p><a [routerLink]="['/Prodotti/Nome','Jordan']" (click)="apriMenu(-1)">Jordan</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Lifestyle</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Calcio</a></p>
+                            <p><a [routerLink]="['/Prodotti','Running']" (click)="apriMenu(-1)">Running</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">LabAir by You</a></p>
+                        </ng-container>
+                        </li>
+                        <li><a [routerLink]="['/Prodotti']" (click)="apriMenu(0)" class="bold">Scopri lo Sport</a>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <br>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Calcio</a></p>
+                            <p><a [routerLink]="['/Prodotti','Running']" (click)="apriMenu(0)">Running</a></p>
+                            <p><a [routerLink]="['/Prodotti','Basket']" (click)="apriMenu(0)">Basket</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Danza</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Tennis</a></p>
+                            <p><a [routerLink]="['/Prodotti','Sneakers']" (click)="apriMenu(0)">Sneakers</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Yoga</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Golf</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Fitness</a></p>
+                            </ng-container>
+                        </li>
+                        <li><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)" class="bold">Abbigliamento</a>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <br>
+                            <p><a (click)="utilities.preventDefaultEvent($event)">Tutto l'Abbigliamento</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)">Maglie e t-shirt</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)">Leggings e tute</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)">Felpe</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)">Shorts</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)">Reggiseni sportivi</a></p>
+                            </ng-container>
+                        </li>
+                        <li><a (click)="utilities.preventDefaultEvent($event)" class="bold">Fascia d'età</a>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <br>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Ragazz* (7-15 anni)</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Bambin* (3-7 anni)</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Bebè o bimb* (0-3 anni)</a></p>
+                            </ng-container>
+                        </li>
+                        <li *ngIf="!configServices.getResize()"><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)"><i *ngIf="!configServices.getResize()" class="fas fa-arrow-left"></i> Torna indietro</a></li>
+                    </div>
+                    </ul>
+                </li>
+                <li (mouseenter)="apriMenu(5)" (mouseenter)="stopClearTime()" (mouseleave)="startClearTime()"   >
+                    <a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)">Saldi</a>
+                    <ul *ngIf="menuSwitch==5" (mouseleave)="apriMenu(0)">
+                        <div class="two-li">
+                        <li>
+                            <a [routerLink]="['/Prodotti/Best_seller','4']" (click)="apriMenu(-1)" class="bold">In Evidenza</a>
+                            <ng-container *ngIf="configServices.getResize()">
+                            <br>
+                            <p><a [routerLink]="['/Prodotti/Nuovo_arrivo','true']" (click)="apriMenu(-1)">Tutti i nuovi arrivi</a></p>
+                            <p><a [routerLink]="['/Prodotti/Best_seller','4']" (click)="apriMenu(-1)">Best Seller</a></p>
+                            <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">MemberShip</a></p>
+                            </ng-container>
+                       </li>
+                       <li>
+                        <a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)" class="bold">Prodotti in saldo</a>
+                        <ng-container *ngIf="configServices.getResize()">
+                        <br>
+                        <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Shorts</a></p>
+                        <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Pantaloni e tute</a></p>
+                        <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Scarpe Jordan Season 2023</a></p>
+                        <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Scarpe Air Max Season 2023</a></p>
+                        <p><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(-1)">Basket Season 2023</a></p>
+                        </ng-container>
+                   </li>
+                        <li *ngIf="!configServices.getResize()"><a (click)="utilities.preventDefaultEvent($event)" (click)="apriMenu(0)"><i *ngIf="!configServices.getResize()" class="fas fa-arrow-left"></i> Torna indietro</a></li>
+                    </div>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id="searchbar">
+            <ng-container *ngIf="configServices.getResize() || openSearch">
+            <div id="search" >
+                <form class="d-flex" role="search" (submit)="submit()">
+                  <input class="form-control" type="search" placeholder="Cerca per Nome" [formControl]="search">
+                </form>
+                <div class="close" *ngIf="!configServices.getResize()">
+                    <i class="fas fa-times" (click)="toggleSearchBar()"></i>
+                </div>
+            </div>
+            </ng-container>
+            <div id="cart-wish-div">
+                <ul id="cart-wish">
+                    <ng-container *ngIf="!configServices.getResize()">
+                    <li class="search" (click)="toggleSearchBar()"><i class="fas fa-search"></i></li>
+                    </ng-container>
+                    <li style="position:relative"><a [routerLink]="['/Checkout']" class="fas fa-shopping-cart" title="Vai al Carrello">
+                        <span *ngIf="itemCount > 0" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ itemCount }}
+                        </span>
+                    </a></li>
+                    <ng-container *ngIf="!configServices.getResize()">
+                    <li class="account"><a [routerLink]="['/Account']" class="fas fa-user"></a></li>
+                    <li class="menu">
+                        <label for="toggle-menu" class="fas fa-bars" (click)="apriMainMenu()">
+                            <input type="checkbox" id="toggle-menu" (click)="apriMainMenu()">
+                        </label></li>
+                    </ng-container>
+                    <ng-container *ngIf="configServices.getResize()">
+                    <li class="wish"><a [routerLink]="['/']" class="fas fa-heart" title="Preferiti"></a></li>
+                </ng-container>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div id="lowerZone" class="p_relative" 
+    (mouseenter)="SliderEventEnter()"
+    (mouseleave)="SliderEventLeave()">
+        <div id="advert" class="" [ngSwitch]="slider">
+            <div class="slide-in-right" *ngSwitchCase="0">
+                <p class="f1_2 "><a [routerLink]="['/']" class="underline">Iscriviti alla Newsletter</a></p>
+                <p>Per te subito uno sconto del 10% sul tuo prossimo acquisto<span class="f0_8">*</span></p>
+            </div>
+            <div class="slide-in-right" *ngSwitchCase="1">
+                <p class="f1_2 ">Diventa membro esclusivo</p>
+                <p><a [routerLink]="['/Register']" class="underline">Unisciti</a> a milioni di clienti e sblocca vantaggi esclusivi<span class="f0_8">*</span></p>
+            </div>
+            <div class="slide-in-right" *ngSwitchCase="2">
+                <p class="f1_2 "><a [routerLink]="['/Prodotti/Nome','Air Jordan']" class="underline">Air Jordan</a></p>
+                <p> La nuova frontiera delle scarpe</p>
+            </div>
+            <div class="slide-in-right" *ngSwitchCase="3">
+                <p class="f1_2 "><a [routerLink]="['/Prodotti']" class="underline">Saldi!</a></p>
+                <p> Scopri le grandi offerte targate LabAir!</p>
+            </div>
+        </div>
+    </div>

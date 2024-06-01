@@ -1,0 +1,408 @@
+<ng-container *ngIf="wizardFormView else conclusioneOrdine"> 
+    <article>
+        <h1>Pagamento</h1>
+    </article>
+    <section id="carrello">
+        <div class="accordion" id="collapseRiepilogo">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" 
+              [attr.data-bs-toggle]="!configServices.getResize() ? 'collapse' : null"
+            [attr.data-bs-target]="!configServices.getResize() ? '#collapseRiepilogo1':null"
+            [attr.aria-expanded]="!configServices.getResize() ? true : false" 
+            aria-controls="collapseRiepilogo1">
+                Riepilogo <h6><a [routerLink]="['/Checkout']"> Modifica Ordine</a></h6>
+              </button>
+            </h2>
+            <div id="collapseRiepilogo1" class="accordion-collapse collapse show" data-bs-parent="#collapseRiepilogo">
+              <div class="accordion-body">
+                <div class="">
+                  <div class="d-flex justify-content-between">
+                    <p class="mb-2">Subtotale</p>
+                    <p class="mb-2">{{subTotal() | number:'1.2-2'}} €</p>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <p class="mb-2">Spedizione </p>
+                    <p class="mb-2">{{subTotal() | valuecheck}}</p>
+                  </div>
+                  <div class="d-flex justify-content-between mb-4">
+                    <p class="mb-2">Totale(IVA inc.)</p>
+                    <p class="mb-2">{{total() | number:'1.2-2'}} €</p>
+                  </div>
+                  <div class="d-flex justify-content-between" *ngIf="!configServices.getResize()">
+                    <p class="mb-2">Numero di Articoli: {{cart.length}}</p>
+                  </div>
+                  <div class="d-flex justify-content-between mb-4">
+                    <p class="mb-2">Data di consegna prevista: {{utilities.getShippingDate()}}</p>
+                  </div>
+              </div>
+
+              <div >
+                <!--Card del prodotto:-->
+                <div class="card mb-3" *ngFor="let prodotto of cart; let i=index">
+                  <div class="card-body">
+                    <div class="card-inner">
+                      <div class="card-inner-imgText">
+                        <div *ngIf="configServices.getResize()">
+                          <a [routerLink]="['/Prodotti/Dettaglio',prodotto.pk_scarpa]">
+                          <img
+                            src={{prodotto.immagine}}
+                            class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                          </a>
+                        </div>
+                        <div class="ms-3">
+                          <h5><a class="link" [routerLink]="['/Prodotti/Dettaglio',prodotto.pk_scarpa]">{{prodotto.nome}}</a></h5>
+                          <p class="small mb-0">{{prodotto.categoria}}, {{prodotto.colore}}, {{prodotto.taglia}}</p>
+                          <p class="small mb-0">quantità: {{prodotto.quantita}}</p>
+                        </div>
+                      </div>
+                      <div class="card-inner-detail">
+                        <div class="card-inner-total">
+                          <h5 class="mb-0">{{prodotto.quantita * prodotto.prezzo | number:'1.2-2'}}€ </h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              </div> 
+            </div>
+          </div>
+        </div>
+    </section>
+
+<form action="#" [formGroup]="wizardForm" (ngSubmit)="submit()" >
+  <div class="accordion" id="accordionStepUno">
+    <div class="accordion-item">
+        <h1 class="accordion-header" id="heading1">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse1'" aria-expanded="true" [attr.aria-controls]="'collapse'">
+              Dati per la Spedizione
+            </button>
+        </h1>
+        <div [id]="'collapse1'" class="accordion-collapse collapse" [ngClass]="{'show':stepView == 1 }" aria-labelledby="heading1" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <section id="stepUno">
+                <div class="title">
+                    <h3>Spedizione</h3>
+                </div>
+                <div class="input-inner">
+                    <div class="input-group flex-nowrap">
+                        <input type="text" class="form-control" placeholder="Nome" formControlName="nome" name="nome" [ngClass]="{'border-danger':wizardForm.get('nome').invalid && wizardForm.get('nome').touched}">
+                        <span class="input-group-text" >
+                          <ng-container *ngIf="wizardForm.get('nome').invalid && wizardForm.get('nome').touched">
+                          <i class="fas fa-times text-danger" 
+                            [attr.title]="wizardForm.get('nome').hasError('required') ? 'Campo mancante' : 'Campo errato'"></i>
+                        </ng-container>
+                        <ng-container *ngIf="(!wizardForm.get('nome').invalid) && wizardForm.get('nome').touched">
+                          <i class="fas fa-check text-success"
+                          [attr.title]="wizardForm.get('nome').valid ? 'Successo' : ''"></i>
+                        </ng-container>
+                        </span>
+                      </div>
+                      <div class="input-group flex-nowrap">
+                        <input type="text" class="form-control" placeholder="Cognome" formControlName="cognome" name="cognome" [ngClass]="{'border-danger':wizardForm.get('cognome').invalid && wizardForm.get('cognome').touched}">
+                        <span class="input-group-text" >
+                          <ng-container *ngIf="wizardForm.get('cognome').invalid && wizardForm.get('cognome').touched">
+                            <i class="fas fa-times text-danger" 
+                              [attr.title]="wizardForm.get('cognome').hasError('required') ? 'Campo mancante' : 'Campo errato'"></i>
+                          </ng-container>
+                          <ng-container *ngIf="(!wizardForm.get('cognome').invalid) && wizardForm.get('cognome').touched">
+                            <i class="fas fa-check text-success" 
+                            [attr.title]="wizardForm.get('cognome').valid ? 'Successo' : ''"></i>
+                          </ng-container>
+                        </span>
+                      </div>
+                </div>
+                <div class="input-inner">
+                    <div class="input-group flex-nowrap">
+                        <input type="text" class="form-control" placeholder="Email" formControlName="email" name="email" [ngClass]="{'border-danger':wizardForm.get('email').invalid && wizardForm.get('email').touched}">
+                        <span class="input-group-text" >
+                          <ng-container *ngIf="wizardForm.get('email').invalid && wizardForm.get('email').touched">
+                            <i class="fas fa-times text-danger" 
+                              [attr.title]="wizardForm.get('email').hasError('required') ? 'Campo mancante' : 'Campo errato'"></i>
+                          </ng-container>
+                          <ng-container *ngIf="(!wizardForm.get('email').invalid) && wizardForm.get('email').touched">
+                            <i class="fas fa-check text-success" 
+                            [attr.title]="wizardForm.get('email').valid ? 'Successo' : ''"></i>
+                          </ng-container>
+                        </span>
+                      </div>
+                      <div class="input-group flex-nowrap">
+                        <input type="text" class="form-control" placeholder="Telefono" formControlName="telefono" name="telefono" [ngClass]="{'border-danger':wizardForm.get('telefono').invalid && wizardForm.get('telefono').touched}">
+                        <span class="input-group-text" >
+                          <ng-container *ngIf="wizardForm.get('telefono').invalid && wizardForm.get('telefono').touched">
+                            <i class="fas fa-times text-danger" 
+                              [attr.title]="wizardForm.get('telefono').hasError('required') ? 'Campo mancante' : 'Campo errato'"></i>
+                          </ng-container>
+                          <ng-container *ngIf="(!wizardForm.get('telefono').invalid) && wizardForm.get('telefono').touched">
+                            <i class="fas fa-check text-success" 
+                            [attr.title]="wizardForm.get('telefono').valid ? 'Successo' : ''"></i>
+                          </ng-container>
+                        </span>
+                      </div>
+                </div>
+                <div class="input-inner">
+                    <div class="input-group flex-nowrap">
+                        <input type="text" class="form-control" placeholder="Indirizzo e civico" formControlName="indirizzo" name="indirizzo" [ngClass]="{'border-danger':wizardForm.get('indirizzo').invalid && wizardForm.get('indirizzo').touched}">
+                        <span class="input-group-text">
+                          <ng-container *ngIf="wizardForm.get('indirizzo').invalid && wizardForm.get('indirizzo').touched">
+                            <i class="fas fa-times text-danger" 
+                              [attr.title]="wizardForm.get('indirizzo').hasError('required') ? 'Campo mancante' : 'Campo errato'"></i>
+                          </ng-container>
+                          <ng-container *ngIf="(!wizardForm.get('indirizzo').invalid) && wizardForm.get('indirizzo').touched">
+                            <i class="fas fa-check text-success" 
+                            [attr.title]="wizardForm.get('indirizzo').valid ? 'Successo' : ''"></i>
+                          </ng-container>
+                        </span>
+                      </div>
+                      <div class="input-group flex-nowrap mini-input">
+                        <input type="text" class="form-control" placeholder="CAP" formControlName="cap" name="cap" [ngClass]="{'border-danger':wizardForm.get('cap').invalid && wizardForm.get('cap').touched}">
+                        <span class="input-group-text">
+                          <ng-container *ngIf="wizardForm.get('cap').invalid && wizardForm.get('cap').touched">
+                            <i class="fas fa-times text-danger" 
+                              [attr.title]="wizardForm.get('cap').hasError('required') ? 'Campo mancante' : 'Campo errato'"></i>
+                          </ng-container>
+                          <ng-container *ngIf="(!wizardForm.get('cap').invalid) && wizardForm.get('cap').touched">
+                            <i class="fas fa-check text-success" 
+                            [attr.title]="wizardForm.get('cap').valid ? 'Successo' : ''"></i>
+                          </ng-container>
+                        </span>
+                      </div>
+                </div>
+                <div class="input-inner">
+                    <div class="input-group flex-nowrap">
+                        <input type="text" class="form-control" placeholder="Città" formControlName="citta" name="citta" [ngClass]="{'border-danger':wizardForm.get('citta').invalid && wizardForm.get('citta').touched}">
+                        <span class="input-group-text" >
+                          <ng-container *ngIf="wizardForm.get('citta').invalid && wizardForm.get('citta').touched">
+                            <i class="fas fa-times text-danger" 
+                              [attr.title]="wizardForm.get('citta').hasError('required') ? 'Campo mancante' : 'Campo errato'"></i>
+                          </ng-container>
+                          <ng-container *ngIf="(!wizardForm.get('citta').invalid) && wizardForm.get('citta').touched">
+                            <i class="fas fa-check text-success" 
+                            [attr.title]="wizardForm.get('citta').valid ? 'Successo' : ''"></i>
+                          </ng-container>
+                        </span>
+                      </div>
+                      <div class="input-group flex-nowrap">
+                        <input type="text" class="form-control" placeholder="Provincia" formControlName="provincia" name="provincia" [ngClass]="{'border-danger':wizardForm.get('provincia').invalid && wizardForm.get('provincia').touched}">
+                        <span class="input-group-text">
+                          <ng-container *ngIf="wizardForm.get('provincia').invalid && wizardForm.get('provincia').touched">
+                            <i class="fas fa-times text-danger" 
+                              [attr.title]="wizardForm.get('provincia').hasError('required') ? 'Campo mancante' : 'Campo errato'"></i>
+                          </ng-container>
+                          <ng-container *ngIf="(!wizardForm.get('provincia').invalid) && wizardForm.get('provincia').touched">
+                            <i class="fas fa-check text-success" 
+                            [attr.title]="wizardForm.get('provincia').valid ? 'Successo' : ''"></i>
+                          </ng-container>
+                        </span>
+                      </div>
+                      <div class="input-group flex-nowrap">
+                        <input type="text" class="form-control" placeholder="Nazione" formControlName="nazione" name="nazione" [ngClass]="{'border-danger':wizardForm.get('nazione').invalid && wizardForm.get('nazione').touched}">
+                        <span class="input-group-text" >
+                          <ng-container *ngIf="wizardForm.get('nazione').invalid && wizardForm.get('nazione').touched">
+                            <i class="fas fa-times text-danger" 
+                              [attr.title]="wizardForm.get('nazione').hasError('required') ? 'Campo mancante' : 'Campo errato'"></i>
+                          </ng-container>
+                          <ng-container *ngIf="(!wizardForm.get('nazione').invalid) && wizardForm.get('nazione').touched">
+                            <i class="fas fa-check text-success" 
+                            [attr.title]="wizardForm.get('nazione').valid ? 'Successo' : ''"></i>
+                          </ng-container>
+                        </span>
+                      </div>
+                </div>
+                <div class="button-stepOne">
+                    <button class="btn btn-dark" type="button" (click)="submitWizardOne()" [disabled]="wizardForm.invalid">Prosegui</button>
+                    <button class="btn btn-dark" type="reset">Reset</button>
+                </div>
+            </section> 
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="accordion" id="accordionStepDue" >
+    <div class="accordion-item">
+        <h1 class="accordion-header" id="heading2">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse2'" aria-expanded="true" [attr.aria-controls]="'collapse'" [disabled]="stepView < 2">
+              Dati per il Pagamento
+            </button>
+        </h1>
+        <div [id]="'collapse2'" class="accordion-collapse collapse" [ngClass]="{'show':stepView == 2 }" aria-labelledby="heading2" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <section id="stepDue">
+                <div class="title">
+                    <h3>Pagamento</h3>
+                </div>
+                    <div class="promozione">
+                      <div>
+                      <label for="promozione">
+                        Hai un codice promozionale? <i class="fa-solid fa-circle-question" (mouseover)="mostraInfo()"></i>
+                      <input type="checkbox" id="promozione" name="promozione" (change)="apriPromozione()">
+                      <div class="infoPromo" *ngIf="mostraInfoPromo">
+                        <p>
+                          Inserisci il codice promozionale a 16 cifre nel seguente formato:
+                          XXXX-XXXXXX-XXXX.
+                        </p>
+                      </div>
+                      </label>
+                      
+                      </div>
+                      <div class="input-group input flex-nowrap" *ngIf="promozioneView">
+                        <input type="text" class="form-control" placeholder="Codice promozionale" formControlName="promoCodice" name="promoCodice" [ngClass]="{'border-danger':wizardForm.get('promoCodice').invalid && wizardForm.get('promoCodice').touched}" (focus)="chiudiInfo()" (click)="chiudiInfo()">
+                        <span class="input-group-text" >
+                          <ng-container *ngIf="wizardForm.get('promoCodice').invalid && wizardForm.get('promoCodice').touched">
+                          <i class="fas fa-times text-danger" 
+                            [attr.title]="wizardForm.get('promoCodice').invalid ? 'Campo errato' : ''"></i>
+                        </ng-container>
+                        <ng-container *ngIf="(!wizardForm.get('promoCodice').invalid) && wizardForm.get('promoCodice').touched">
+                          <i class="fas fa-check text-success"
+                          [attr.title]="wizardForm.get('promoCodice').valid ? 'Successo' : ''"></i>
+                        </ng-container>
+                        </span>
+                      </div>
+                    </div>
+                    <div >
+                      <h6 class="mb-3">Scegli il metodo di pagamento:</h6>
+                    </div>
+                    <div id="metodiPagamento">
+                      <div class="pagamento-radio">
+                        <input type="radio" id="carta" name="metodoPagamento" value="Carta" formControlName="metodoPagamento" (change)="gestisciControlli()">
+                        <label for="carta">
+                          <ng-container *ngIf="configServices.getResize() else mobileFirst">
+                          <i class="fas fa-credit-card" ></i>
+                          <p>Paga con</p>
+                          <p>Carta di Credito</p>
+                          </ng-container>
+                          <ng-template #mobileFirst>
+                            <p><i class="fas fa-credit-card" ></i> Paga con Carta di Credito</p>
+                          </ng-template>
+                          <div class="tipiCarta" *ngIf="configServices.getResize()">
+                            <i class="fab fa-cc-visa"></i>
+                            <i class="fab fa-cc-mastercard"></i>
+                            <i class="fab fa-cc-amazon-pay"></i>
+                          </div>
+                        </label>
+                        
+                      </div>
+                      <div class="pagamento-radio">
+                        <input type="radio" id="paypal" name="metodoPagamento" value="Paypal" formControlName="metodoPagamento" (change)="gestisciControlli()">
+                        <label for="paypal">
+                          <ng-container *ngIf="configServices.getResize() else mobileFirstPp ">
+                          <i class="fab fa-paypal"></i>
+                          <p>Paga con Paypal</p>
+                          </ng-container>
+                          <ng-template #mobileFirstPp>
+                            <p><i class="fab fa-paypal"></i> Paga con Paypal</p>
+                          </ng-template>
+                        </label>
+                        
+                      </div>
+                      <div class="pagamento-radio">
+                        <input type="radio" id="gpay" name="metodoPagamento" value="GPay" formControlName="metodoPagamento" (change)="gestisciControlli()">
+                        <label for="gpay">
+                          <ng-container *ngIf="configServices.getResize() else mobileFirstGp ">
+                            <i class="fas fa-credit-card"></i>
+                            <p>Paga con GPay</p>
+                          </ng-container>
+                          <ng-template #mobileFirstGp>
+                            <p><i class="fa-brands fa-google-pay"></i> Paga con GPay</p>
+                          </ng-template> 
+                        </label>
+                      </div>
+                    </div>
+                    <ng-container *ngIf="wizardForm.get('metodoPagamento').value == 'Carta' ">
+                      <div class="input-inner">
+                        <div class="input-group flex-nowrap">
+                            <input type="text" class="form-control" placeholder="Codice della carta" formControlName="cartaCodice" name="cartaCodice" [ngClass]="{'border-danger':wizardForm.get('cartaCodice').invalid && wizardForm.get('cartaCodice').touched}">
+                            <span class="input-group-text" >
+                              <ng-container *ngIf="wizardForm.get('cartaCodice').invalid && wizardForm.get('cartaCodice').touched">
+                              <i class="fas fa-times text-danger" 
+                                [attr.title]="wizardForm.get('cartaCodice').hasError('required') ? 'Campo mancante' : 'Campo errato'"></i>
+                            </ng-container>
+                            <ng-container *ngIf="(!wizardForm.get('cartaCodice').invalid) && wizardForm.get('cartaCodice').touched">
+                              <i class="fas fa-check text-success"
+                              [attr.title]="wizardForm.get('cartaCodice').valid ? 'Successo' : ''"></i>
+                            </ng-container>
+                            </span>
+                          </div>
+                          <div class="input-group flex-nowrap">
+                            <input type="text" class="form-control" placeholder="Data di scadenza (mm/yy)" formControlName="dataScadenza" name="dataScadenza" [ngClass]="{'border-danger':wizardForm.get('dataScadenza').invalid && wizardForm.get('dataScadenza').touched}">
+                            <span class="input-group-text" >
+                              <ng-container *ngIf="wizardForm.get('dataScadenza').invalid && wizardForm.get('dataScadenza').touched">
+                                <i class="fas fa-times text-danger" 
+                                  [attr.title]="wizardForm.get('dataScadenza').hasError('required') ? 'Campo mancante' : 'Campo errato'"></i>
+                              </ng-container>
+                              <ng-container *ngIf="(!wizardForm.get('dataScadenza').invalid) && wizardForm.get('dataScadenza').touched">
+                                <i class="fas fa-check text-success" 
+                                [attr.title]="wizardForm.get('dataScadenza').valid ? 'Successo' : ''"></i>
+                              </ng-container>
+                            </span>
+                          </div>
+                          <div class="input-group flex-nowrap mini-input">
+                            <input type="text" class="form-control" placeholder="CVV" formControlName="Cvv" name="Cvv" [ngClass]="{'border-danger':wizardForm.get('Cvv').invalid && wizardForm.get('Cvv').touched}">
+                            <span class="input-group-text" >
+                              <ng-container *ngIf="wizardForm.get('Cvv').invalid && wizardForm.get('Cvv').touched">
+                                <i class="fas fa-times text-danger" 
+                                  [attr.title]="wizardForm.get('Cvv').hasError('required') ? 'Campo mancante' : 'Campo errato'"></i>
+                              </ng-container>
+                              <ng-container *ngIf="(!wizardForm.get('Cvv').invalid) && wizardForm.get('Cvv').touched">
+                                <i class="fas fa-check text-success" 
+                                [attr.title]="wizardForm.get('Cvv').valid ? 'Successo' : ''"></i>
+                              </ng-container>
+                            </span>
+                          </div>
+                      </div>
+                      <div class="final-button"> 
+                        <button type="submit" class="btn btn-dark" [disabled]="wizardForm.invalid">Completa l'ordine</button>
+                    </div>
+                    </ng-container>
+                    <ng-container *ngIf="wizardForm.get('metodoPagamento').value == 'Paypal' ">
+                      <div class="final-button">
+                        <button type="submit" class="btn btn-dark" [disabled]="wizardForm.invalid">Paga con Paypal</button>
+                    </div>
+                    </ng-container>
+                    <ng-container *ngIf="wizardForm.get('metodoPagamento').value == 'GPay' ">
+                      <div class="final-button">
+                        <button type="submit" class="btn btn-dark" [disabled]="wizardForm.invalid">Paga con Gpay</button>
+                    </div>
+                    </ng-container>
+            </section> 
+            </div>
+        </div>
+    </div>
+  </div>
+</form>
+
+
+
+
+</ng-container>
+
+<ng-template #conclusioneOrdine>
+  <article class="full-grid ">
+    <div>
+      <h1>Grazie per il tuo acquisto!</h1>
+  </div>
+  <div>
+      <p>Gentile cliente l'avvisiamo che il suo ordine è avvenuto con <span class="bold ">Successo.</span></p>
+      <p>Riceverà un E-mail al suo indirizzo con il riepilogo del suo ordine.</p>
+      <p>Di seguito le riportiamo i dettagli dell'ordine:</p>
+      <div>
+          <ul>
+            <li>Data d'acquisto: <span class="bold">{{utilities.getDate()}}</span></li>
+            <li>Totale: <span class="bold">{{totale | currency:"EUR"}} </span></li>
+            <li>Numero d'ordine: <span class="bold">{{codiceOrdine}}</span></li>
+          </ul>
+      </div>
+      <br>
+      <p>
+        <span class="bold">Hai bisogno d'assistenza? </span><br> Contattaci al numero <span class="bold">06-542217291</span>, scrivici un <a href="javascript:avoid(0)" class="bold ">E-mail</a> oppure raggiungici in <a href="javascript:avoid(0)" class="bold">Live Chat</a>.
+      </p>
+      <p><span class="bold">Hai un account? <br></span><a [routerLink]="['/Login']" class="bold">Accedi</a> per seguire in tempo reale il tuo ordine, oppure <a  [routerLink]="['/Register']"  class="bold ">Iscriviti</a> ora per avere tutte le comodità.</p>
+      <p>Grazie ancora per la sua fiducia, intero staff di LabAir ti ringrazia.</p>
+      <a [routerLink]="['/Home']" class="bold">A Ritorna alla Home</a>
+         <div class="final-img"><img src="{{utilities.logourl}}" alt="Logo LabAir"></div>
+  </div>
+  </article>
+</ng-template>
+

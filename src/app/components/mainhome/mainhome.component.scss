@@ -1,0 +1,181 @@
+@use "../../style/utilities/mixin" as mix ;
+@use "../../style/utilities/color" as col;
+@use "../../style/utilities/var" as var;
+
+$img-Height: 380px;
+$card-height: $img-Height + 177px;
+$card-height-sport: $img-Height + 101px;
+$card-height-member: $img-Height + 166px;
+
+:host {
+    width: 100%;
+    @include mix.FlexBurger(true);
+}
+
+
+#herobanner {
+    width: 100%;
+    height: 170px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    & > div {
+        width: 100%;
+        height: 100%;
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        .buttonContainer {
+            min-width: 50%;
+        }
+        p {
+            color: #FF2A02;
+        }
+
+    }
+    
+    
+}
+
+main {
+    padding: 1em 0;
+    img {
+        height: $img-Height;
+    }
+
+    #bestSeller,#Sport,#Member {
+        margin-bottom: 1em;
+        div {
+            &.title{
+                background: col.$bg-Header;
+                background: col.$bg-Header-gradient;
+            }
+            &.card{
+                width: 18rem;
+            }
+        }
+
+        div.card-container{
+            @include mix.FlexStandard(space-between);
+            @include mix.ScrollBar();
+            overflow-x: scroll;
+            gap: 1em;
+            padding: 0.5em 0;
+            div {
+                flex:  0 0 100%;
+                img {
+                    &.filter-grey {
+                        filter: grayscale(100%) !important;
+                    }
+                }
+                &.endcard {
+                    background: col.$bg-Header;
+                    background: col.$bg-Header-gradient;
+                   /*  height: 558px; */
+                    @include mix.FlexBurger(true);
+                    img {
+                        height: 100%;
+                        padding: 2em;
+                    }
+                    div {
+                    @include mix.FlexBurger();
+                    
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and (min-width: 768px) {
+
+    :host {
+        margin: 1em;
+    }
+
+    #herobanner{
+        height: 500px;
+        background-size: cover;
+        background-position: top 0 left 0;
+        & > div {
+            .buttonContainer {
+                width: 30%;
+            }
+            .textContainer{
+                width: 2 0%;
+                p {
+                font-size: var.$p-herobanner-DeskSize;
+                } 
+            }
+       
+    
+        }
+    }
+
+    main {
+        overflow: hidden;
+        padding: 1em;
+
+        div{
+            &.title{
+            @include mix.FlexStandard(space-between);
+            }
+
+            &.moveArrow{
+                width: 10%;
+                @include mix.FlexStandard(space-between);
+                margin-right: 1em;
+                button {
+                    font-size: 1.5rem;
+                }
+            }
+        }
+
+        #bestSeller,#Sport,#Member {
+
+            div.card-container{
+                div {
+                    flex:  0 0 32%;
+                    &.endcard{
+                        height: $card-height;
+                    }
+                    &.endcardSport{
+                        height: $card-height-sport;
+                    }
+                    &.endcardMember{
+                        height: $card-height-member;
+                    }
+                }
+                
+            }
+            
+        }
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+.bg-banner1{
+        background-image: url("https://www.here-store.com/on/demandware.static/-/Library-Sites-here-content-global/default/dw6910c95a/2021/testbanner/new-content-7/Scarpe-1440x610-Sneakers-FindYourOwn.jpg" );
+    }
+.bg-banner2{
+    background-image: url("https://www.here-store.com/on/demandware.static/-/Library-Sites-here-content-global/default/dw021198fc/2021/testbanner/new-content-7/Scarpe-1440x610-Boots-TheseArePerfect.jpg");
+}
+.bg-banner3{
+    background-image: url("https://www.kickgame.com/cdn/shop/articles/banner.png?crop=center&height=2000&v=1659630431&width=2000");
+}
+
+
+.fa-star {color: white;}
+.full {color: #ffd700;}

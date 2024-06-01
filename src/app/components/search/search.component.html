@@ -1,0 +1,199 @@
+<aside>
+    <div class="filter" *ngIf="!configServices.getResize()">
+            <label for="toggle-filter" class="fas fa-filter">
+                Filtra
+                <input type="checkbox" id="toggle-filter" (click)="openFilter()">
+            </label>
+    </div>
+    <ng-container role="mobileViewFilter" *ngIf="mobileView">
+    <div *ngIf="configServices.getResize()">
+        <h4 class="text-center">Filtra per:</h4>
+    </div>
+    <form action="#" method="post" >
+        <div class="accordion" id="accordionCat">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCat" aria-expanded="true" aria-controls="collapseCat">
+                  Categorie
+                </button>
+              </h2>
+              <div id="collapseCat" class="accordion-collapse collapse show" data-bs-parent="#accordionCat">
+                <div class="accordion-body">
+                    <div class="input-cointainer">
+                        <ng-container *ngFor="let categoria of utilities.arrayCategoria">
+                        <div class="marginB_03">
+                            <input type="checkbox" id="{{categoria.nome}}" name="{{categoria.nome}}" value="{{categoria.nome}}" (change)="CatSelet(categoria.nome)">
+                            <label class="btn btn-dark" for="{{categoria.nome}}">{{categoria.nome}}</label>
+                        </div> 
+                        </ng-container>
+                        </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="accordion" id="accordionPrezzo">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePrezzo" aria-expanded="true" aria-controls="collapsePrezzo">
+                  Prezzo
+                </button>
+              </h2>
+              <div id="collapsePrezzo" class="accordion-collapse collapse hide" data-bs-parent="#accordionPrezzo">
+                <div class="accordion-body">
+                    <div class="input-cointainer">
+                        <div class="marginB_03 price-container">
+                            <div class="price-container-inner">
+                                <div>
+                                    <label for="minPrice">Min.</label>
+                                    <input type="text" id="minPrice" name="minPrice" [(ngModel)]="minPrice">
+                                </div>
+                                <div>
+                                    <label for="maxPrice">Max.</label>
+                                    <input type="text" id="maxPrice" name="maxPrice" [(ngModel)]="maxPrice" >
+                                </div>
+                            </div>
+                            <div>
+                                <ngx-slider class="custom-slider" id="priceRange"
+                                [(value)]="minPrice"
+                                [(highValue)]="maxPrice"
+                                [options]="sliderOptions">
+                            </ngx-slider>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="accordion" id="accordionCol">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCol" aria-expanded="true" aria-controls="collapseCol">
+                  Colori
+                </button>
+              </h2>
+              <div id="collapseCol" class="accordion-collapse collapse hide" data-bs-parent="#accordionCol">
+                <div class="accordion-body">
+                    <div class="input-cointainer">
+                        <div class="color-container">
+                            <div class="color-container-inner">
+                            <ng-container *ngFor="let colore of utilities.arrayColori">
+                                <div class="marginB_03">
+                                    <input type="checkbox" id="{{colore.nome}}" name="{{colore.nome}}" value="{{colore.nome}}" (change)="ColorSelet(colore.nome)">
+                                    <label for="{{colore.nome}}" title="{{colore.nome}}" [ngStyle]="{'background': colore.hex}"></label>
+                                </div> 
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="accordion" id="accordionRat">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRat" aria-expanded="true" aria-controls="collapseRat">
+                  Rating
+                </button>
+              </h2>
+              <div id="collapseRat" class="accordion-collapse collapse" data-bs-parent="#accordionRat">
+                <div class="accordion-body">
+                  <div class="input-cointainer">
+                    <div class="rating-container">
+                        <div class="rating">
+                            <p class="fa fa-star" [ngClass]="{'full': ratingValue>=1}"  data-rating="1"></p>
+                            <p class="fa fa-star " [ngClass]="{'full': ratingValue>=2}" data-rating="2"></p>
+                            <p class="fa fa-star" [ngClass]="{'full': ratingValue>=3}" data-rating="3"></p>
+                            <p class="fa fa-star" [ngClass]="{'full': ratingValue>=4}" data-rating="4"></p>
+                            <p class="fa fa-star" [ngClass]="{'full': ratingValue>=5}" data-rating="5"></p>
+                        </div>
+                        <div>
+                            <ngx-slider id="ratingRange"
+                            [(value)]="ratingValue"
+                            [options]="ratingOptions">
+                        </ngx-slider>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="accordion" id="accordionAltro">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAltro" aria-expanded="true" aria-controls="collapseAltro">
+                  Altri filtri
+                </button>
+              </h2>
+              <div id="collapseAltro" class="accordion-collapse collapse" data-bs-parent="#accordionAltro">
+                <div class="accordion-body">
+                  <div class="input-container">
+                        <div class="news">
+                            <input type="checkbox" class="form-check-input visibility" id="news" name="news" [(ngModel)]="news">
+                            <label for="news">Nuovi arrivi</label>
+                        </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </form>
+    <div class="btn-submit">
+        <button type="submit" class="btn btn-dark" (click)="submit()">Applica</button>
+        <!-- <button type="button" class="btn btn-dark" (click)="reset()">Reset</button> -->
+    </div>
+
+</ng-container>
+</aside>
+
+<main>
+    <div class="title">
+        <h2>{{mainTitle}}</h2>
+        <div *ngIf="configServices.getResize()"><p class="small mb-0">Prodotti Visualizzati: {{scarpe.length}}</p></div>
+    </div>
+    <ng-container *ngIf="scarpe.length > 0 ; else noProduct">
+    <section>
+    <ng-container *ngFor="let articolo of scarpe">
+        <div class="card">
+            <div class="card-body">
+            <a [routerLink]="['/Prodotti/Dettaglio', articolo.id]"><img src={{articolo.immagine}} class="card-img-top" alt={{articolo.nome}}></a>
+              <h5 class="card-title pointer" [routerLink]="['/Prodotti/Dettaglio', articolo.id]">{{articolo.nome}}</h5>
+              <div class="card-text">
+                <p class="fa fa-star" [ngClass]="{'full': articolo.best_seller>=1}"  data-rating="1"></p>
+                <p class="fa fa-star " [ngClass]="{'full': articolo.best_seller>=2}" data-rating="2"></p>
+                <p class="fa fa-star" [ngClass]="{'full': articolo.best_seller>=3}" data-rating="3"></p>
+                <p class="fa fa-star" [ngClass]="{'full': articolo.best_seller>=4}" data-rating="4"></p>
+                <p class="fa fa-star" [ngClass]="{'full': articolo.best_seller>=5}" data-rating="5"></p>
+              </div>
+              <p class="card-text mb-1">{{articolo.categoria}}</p>
+              <p class="card-text text-success">{{articolo.prezzo | currency:"€"}}</p>
+              <button type="button" [routerLink]="['/Prodotti/Dettaglio', articolo.id]"  class="btn btn-dark">Acquista</button>
+            </div>
+        </div>
+        </ng-container>
+    </section>
+    <div class="continueButton">
+        <div class="button-container">
+            <div *ngIf="configServices.getResize()"><p >Prodotti Visualizzati: {{scarpe.length}}</p></div>
+            <div *ngIf="isContinueElement"><button type="button" class="btn btn-dark" (click)="continueView()">Mostra altri articoli</button></div>
+        </div>
+        
+    </div>
+    </ng-container>
+    <ng-template #noProduct>
+    <div class="no-find">
+        <h4>
+            La tua ricerca non ha portato alcun Risultato!
+        </h4>
+        <h6>Riprova</h6>
+        <div>
+          <img src={{utilities.logourl}} alt="Logo LabAir">  
+        </div>
+        
+    </div>
+    </ng-template>
+</main>
+

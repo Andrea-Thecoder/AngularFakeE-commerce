@@ -1,0 +1,117 @@
+<section id="herobanner" [ngClass]="bgHeroBanner" 
+(mouseenter)="HeroBannerEnter()" 
+(mouseleave)="HeroBannerLeave()">
+    <div>
+        <div class="textContainer">
+            <p>{{heroBannerText}}</p>
+        </div>
+        <div class="buttonContainer">
+            <button type="button" class="btn btn-dark" [routerLink]="[heroBannerUrl,heroBannerParams]">{{heroBannerButtonText}}</button>
+        </div>
+    </div>
+</section>
+
+<main>
+    <section id="bestSeller">
+        <div class="title" >
+            <div><h3>Best Seller</h3></div>
+            <div class="moveArrow" *ngIf="configServices.getResize()">
+                <button type="button" class="btn fas fa-angle-double-left" 
+                (click)="ScrollLeftRight(bestSellerSlider,'left')"></button>
+                <button type="button" class="btn fas fa-angle-double-right" (click)="ScrollLeftRight(bestSellerSlider,'right')"
+                ></button>
+            </div>   
+        </div>
+        <div class="card-container" #BestSellerSlider>
+        <ng-container *ngFor="let articolo of ScarpeBest4">
+        <div class="card">
+            <div class="card-body">
+            <img src={{articolo.immagine}} class="card-img-top" alt={{articolo.nome}}>
+              <h5 class="card-title">{{articolo.nome}}</h5>
+              <div class="card-text">
+                <p class="fa fa-star" [ngClass]="{'full': articolo.best_seller>=1}"  data-rating="1"></p>
+                <p class="fa fa-star " [ngClass]="{'full': articolo.best_seller>=2}" data-rating="2"></p>
+                <p class="fa fa-star" [ngClass]="{'full': articolo.best_seller>=3}" data-rating="3"></p>
+                <p class="fa fa-star" [ngClass]="{'full': articolo.best_seller>=4}" data-rating="4"></p>
+                <p class="fa fa-star" [ngClass]="{'full': articolo.best_seller>=5}" data-rating="5"></p>
+              </div>
+              <p class="card-text text-success">{{articolo.prezzo | currency:" €"}}</p>
+              <button type="button" [routerLink]="['/Prodotti/Dettaglio', articolo.id]"  class="btn btn-dark">Acquista</button>
+            </div>
+          </div>
+        </ng-container>
+        <div class="card endcard ">
+            <div class="card-body">
+            <img src={{utilities.logourl}} class="card-img-top" alt="LabAir ">
+            <div class="card-text">
+                <h4 class="card-title">Scopri tutti i nostri BestSeller!</h4>
+                <button type="button" [routerLink]="['/Prodotti']"  class="btn btn-dark">Vai ai Best Seller</button>
+            </div>
+          </div>
+        </div>
+        </div>
+    </section>
+    <section id="Sport">
+        <div class="title" >
+            <div><h3>Scopri per Categoria</h3></div>
+            <div class="moveArrow" *ngIf="configServices.getResize()">
+                <button type="button" class="btn fas fa-angle-double-left" 
+                (click)="ScrollLeftRight(sportSlider,'left')"></button>
+                <button type="button" class="btn fas fa-angle-double-right" (click)="ScrollLeftRight(sportSlider,'right')"
+                ></button>
+            </div>   
+        </div>
+        <div class="card-container" #SportSlider>
+        <ng-container *ngFor="let categoria of utilities.arrayCategoria">
+        <div class="card">
+            <div class="card-body">
+            <img src={{categoria.immagine}} class="card-img-top filter-grey" alt={{categoria.nome}}>
+              <h5 class="card-title">{{categoria.nome}}</h5>
+              <button type="button" [routerLink]="['/Prodotti',categoria.nome]"  class="btn btn-dark">{{categoria.nome}}</button>
+            </div>
+          </div>
+        </ng-container>
+        <div class="card endcard endcardSport">
+            <div class="card-body">
+            <img src={{utilities.logourl}} class="card-img-top" alt="LabAir ">
+            <div class="card-text">
+                <h4 class="card-title">Scopri tutti i prodotti!</h4>
+                <button type="button" [routerLink]="['/Prodotti']"  class="btn btn-dark">Visualizza tutti i prodotti</button>
+            </div>
+          </div>
+        </div>
+        </div>
+    </section>
+    <section id="Member">
+        <div class="title" >
+            <div><h3>Essere Member</h3></div>
+            <div class="moveArrow" *ngIf="configServices.getResize()">
+                <button type="button" class="btn fas fa-angle-double-left" 
+                (click)="ScrollLeftRight(memberSlider,'left')"></button>
+                <button type="button" class="btn fas fa-angle-double-right" (click)="ScrollLeftRight(memberSlider,'right')"
+                ></button>
+            </div>   
+        </div>
+        <div class="card-container" #MemberSlider>
+        <ng-container *ngFor="let member of utilities.arrayMember">
+        <div class="card">
+            <div class="card-body">
+            <img src={{member.immagine}} class="card-img-top" alt={{member.nome}}>
+              <h5 class="card-title">{{member.nome}}</h5>
+              <p class="card-text">{{member.text}}</p>
+              <button type="button" [routerLink]="[member.url]" class="btn btn-dark">{{member.nome}}</button>
+            </div>
+          </div>
+        </ng-container>
+        <div class="card endcard endcardMember">
+            <div class="card-body">
+            <img src={{utilities.logourl}} class="card-img-top" alt="LabAir ">
+            <div class="card-text">
+                <h4 class="card-title">Scopri tutti i vantaggi di essere Member!</h4>
+                <button type="button" [routerLink]="['/']"  class="btn btn-dark">Scopri i vantaggi</button>
+            </div>
+          </div>
+        </div>
+        </div>
+    </section>
+</main>

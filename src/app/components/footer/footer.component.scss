@@ -1,0 +1,217 @@
+@use "../../style/utilities/mixin" as mix ;
+@use "../../style/utilities/color" as col;
+@use "../../style/utilities/var" as var;
+
+
+/*#region variable*/
+$font-size-standard:0.8rem;
+$font-size-mobile: 0.7rem;
+$font-size-mobile-icon: 1.5rem;
+/*#endregion variable*/
+
+:host {
+    padding-top: 1em;
+    background-color: black;
+    width: 100%;
+    @include mix.FlexBurger(true);
+    gap: 2em;
+}
+
+a {
+    color: white;
+}
+
+
+
+#footer_upperZone {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-areas: 
+    "menu"
+    "icon";
+    row-gap: 2em;
+    .grid-menu-big{
+        grid-area: menu;
+        ul {
+            @include mix.FlexStandard(space-between);
+            font-size: $font-size-mobile;
+            margin: 0 0.5em;
+        }
+    }
+    .grid-menu-icon{
+        grid-area: icon;
+        display: flex;
+        justify-content: center;
+
+        ul{
+            @include mix.FlexStandard(center);
+            gap: 2em;
+            &:last-of-type li a {
+                display: block;
+                font-size: $font-size-mobile-icon;
+                border: 1px transparent solid;
+                border-radius: var.$border-radius;
+                &:hover {
+                    color: white;
+                }
+            }
+            &:last-of-type li{
+                &:first-of-type a {
+                background-color: #1877F2;
+                }
+                &:nth-child(2) a {
+                    background-color:#FF0000 ;
+                }
+                &:nth-child(3) a {
+                    background-color: #1DA1F2;
+                } 
+                &:nth-child(4) a{
+                    background: #f09433;
+                    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+                }
+            }
+            
+        }
+    }
+}
+
+
+#footer_lowerZone {
+    p {
+        font-size: $font-size-mobile;
+        color: #fff;
+    }
+} 
+
+
+@media screen and (min-width: 768px) {
+
+    #footer_upperZone {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 60% 40%;
+        grid-template-areas:
+        "menu icon";
+        row-gap: 0;
+        .grid-menu-big{
+            grid-area: menu;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 0.5em;
+            ul {
+                display: block;
+                &:not(:first-of-type) li:not(:first-of-type) a{
+                    font-size: $font-size-standard;
+                } 
+                &:first-of-type {
+                    font-size: 1.1rem;
+                }
+            }
+        }
+        .grid-menu-icon{
+            grid-area: icon;
+            display: flex;
+            justify-content: flex-end;
+            margin-right: 1.5em;
+    
+            ul{
+                @include mix.FlexStandard(center);
+                gap: 2em;
+                &:last-of-type li a {
+                    color: col.$secondary-paint;
+                    display: block;
+                    text-align: center;
+                    font-size: 2.5rem;
+                    background-color: col.$bg-footer;
+                    border: 1px transparent solid;
+                    border-radius: var.$border-radius;
+                    transition: .8s ease;
+                    &:hover {
+                        transform: scale(115%);
+                        color: white;
+                        border: none;
+                    }
+                    
+                }
+                &:last-of-type li{
+                    &:first-of-type a {
+                    background-color:col.$bg-footer;
+                    }
+                    &:nth-child(2) a {
+                        background-color:col.$bg-footer ;
+                    }
+                    &:nth-child(3) a {
+                        background-color: col.$bg-footer;
+                    } 
+                    &:nth-child(4) a{
+                        background: col.$bg-footer; 
+                    }
+                }
+                &:last-of-type li{
+                    &:first-of-type a:hover {
+                    background-color: #1877F2;
+                    }
+                    &:nth-child(2) a:hover {
+                        background-color:#FF0000 ;
+                    }
+                    &:nth-child(3) a:hover {
+                        background-color: #1DA1F2;
+                    } 
+                    &:nth-child(4) a:hover{
+                        background: #f09433;
+                        background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+                    }
+                }
+                
+            }
+        }
+        ul {
+            li a:hover {
+            border-bottom: 2px col.$bg-Header solid;
+            border-top: 2px col.$bg-Header solid;
+            border-radius: 4px;
+            }
+            &:not(:first-of-type) li:not(:first-of-type) a{
+                color: col.$secondary-paint;
+            }
+        }
+    }
+    
+    
+    #footer_lowerZone {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 60px auto;
+        grid-template-areas: 
+        "... menudx"
+        "menusx menusx";
+        ul{
+            @include mix.FlexStandard(space-between);
+            li {
+                a {
+                color: col.$secondary-paint;
+                &:hover {
+                    color: #fff;
+                }
+                }
+            }
+        } 
+        
+        .menudx{
+            grid-area: menudx;
+            margin-right: 1.6em;
+            align-self: flex-end;
+            font-size: $font-size-standard;
+        }
+        .menusx {
+            grid-area: menusx;
+        }
+        p{
+            font-size: $font-size-standard;
+        }
+    }
+    
+
+}

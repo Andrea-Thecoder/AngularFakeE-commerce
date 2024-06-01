@@ -1,0 +1,100 @@
+<section class="h-100 h-custom" style="background-color: #eee;">
+  <div>
+    <h2>
+      Il tuo Carrello
+    </h2>
+  </div>
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <div class="card">
+            <div class="card-body p-4">
+  
+              <div class="row">
+  
+                <div class="col-lg-8">
+                  <h5 class="mb-3"><a [routerLink]="['/Prodotti']" class="text-body">
+                    <i class="fas fa-long-arrow-alt-left me-2"></i>Torna agli acquisti</a></h5>
+                  <hr>
+  
+                  <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                      <p class="mb-1 ">Il tuo Carrello</p>
+                      <p class="mb-0">Hai {{cart.length}} articoli aggiunti</p>
+                    </div>
+                  </div>
+                  <!--Card del prodotto:-->
+                  <div class="card mb-3" *ngFor="let prodotto of cart; let i=index">
+                    <div class="card-body">
+                      <div class="card-inner">
+                        <div class="card-inner-imgText">
+                          <div *ngIf="configServices.getResize()">
+                            <a [routerLink]="['/Prodotti/Dettaglio',prodotto.pk_scarpa]">
+                            <img
+                              src={{prodotto.immagine}}
+                              class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                            </a>
+                          </div>
+                          <div class="ms-3">
+                            <h5><a class="link" [routerLink]="['/Prodotti/Dettaglio',prodotto.pk_scarpa]">{{prodotto.nome}}</a></h5>
+                            <p class="small mb-0">{{prodotto.categoria}}, {{prodotto.colore}}, {{prodotto.taglia}} </p>
+                          </div>
+                        </div>
+                        <div class="card-inner-detail">
+                          <div >
+                            <select class="form-select"  [(ngModel)]="selectOption[i]" (change)="onChangeSelect(i)">
+                              <option 
+                              *ngFor="let nulla of option; let i=index" 
+                              value={{i+1}} >
+                                  {{i+1}}
+                              </option>
+                          </select>
+                            <!-- <h5 class="fw-normal mb-0">{{prodotto.quantita}}</h5> -->
+                          </div>
+                          <div class="card-inner-total">
+                            <h5 class="mb-0">{{prodotto.quantita * prodotto.prezzo | number:'1.2-2'}}€ </h5>
+                          </div>
+                          <button class="btn btn-sm btn-danger" (click)="deleteItem(prodotto.id)"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!--colonna di destra-->
+                <div class="col-lg-4">
+  
+                      <div class="d-flex justify-content-between">
+                        <p class="mb-2">Subtotale</p>
+                        <p class="mb-2">{{subTotal() | number:'1.2-2'}} €</p>
+                      </div>
+  
+                      <div class="d-flex justify-content-between">
+                        <p class="mb-2">Spedizione </p>
+                        <p class="mb-2">{{subTotal() | valuecheck}}</p>
+                      </div>
+  
+                      <div class="d-flex justify-content-between mb-4">
+                        <p class="mb-2">Totale(IVA inc.)</p>
+                        <p class="mb-2">{{total() | number:'1.2-2'}} €</p>
+                      </div>
+                      <div class="button-zone">
+                        <button type="button" class="btn btn-dark btn-block" [disabled]="buttonEnable">
+                          <div class="d-flex justify-content-between">
+                            <span><a [routerLink]="['/Wizard']" class="text-white">Prosegui col pagamento</a><i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                          </div>
+                        </button>
+                        <button id="paypal-button" type="button" class="btn btn-info btn-block" [disabled]="buttonEnable">
+                          <div class="d-flex justify-content-between">
+                            <span><a href="https://www.paypal.com/signin">Pagamento Rapido con </a><i class="fab fa-paypal"></i><i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                          </div>
+                        </button>
+                      </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>

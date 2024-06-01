@@ -1,0 +1,19 @@
+@use "../../style/utilities/mixin" as mix ;
+@use "../../style/utilities/color" as col;
+@use "../../style/utilities/var" as var;
+
+
+:host {
+    text-align: center;
+    @include mix.FlexStandard(center);
+    padding: 2em;
+}
+
+div{
+    @include mix.FlexBurger();
+    padding: 1em;
+    p{
+        padding: 0;
+        margin: 0;
+    }
+}

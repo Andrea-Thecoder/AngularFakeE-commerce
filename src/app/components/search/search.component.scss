@@ -1,0 +1,279 @@
+@use "../../style/utilities/mixin" as mix ;
+@use "../../style/utilities/color" as col;
+@use "../../style/utilities/var" as var;
+@import "../../../../node_modules/@angular-slider/ngx-slider/scss/ngx-slider.scss";
+
+
+$img-Height: 380px;
+$card-height: $img-Height + 177px;
+$card-height-sport: $img-Height + 101px;
+$card-height-member: $img-Height + 166px;
+
+
+:host {
+    width: 100%;
+    margin: 1em 0;
+    @include mix.FlexBurger(true);
+}
+
+.accordion-button,.accordion,.accordion-item{
+    background-color: transparent;
+    box-shadow: none;
+    
+}
+.accordion-button{
+    padding: 0.35em;
+    border: 1px solid black !important;
+}
+
+.accordion {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+input[type=checkbox]{
+    display:none;
+}
+
+
+
+
+img {
+    height: $img-Height;
+}
+
+
+
+main {
+    @include mix.FlexBurger(true);
+    gap: 0.3em;
+    .title{
+        background: col.$bg-Header;
+        background: col.$bg-Header-gradient;
+        text-align: center;
+    }
+    section {
+        @include mix.FlexBurger();
+        gap: 1em;
+
+        div{
+            flex:  0 0 100%;
+        }
+        .card {
+            width: 18rem;
+        }
+    }
+    .continueButton{
+        @include mix.FlexStandard(center);
+        padding: 0.15em;
+        .button-container{
+        @include mix.FlexStandard(center);
+        gap: 1em;
+        align-items: baseline;
+        width: 95%;
+        padding: 0.3em;
+        border-top:1px solid black;
+        border-radius:var.$border-radius;
+        }
+    }
+    .no-find{
+        @include mix.FlexBurger();
+        background: col.$bg-Header;
+        background: col.$bg-Header-gradient;
+        img {
+            padding: 2em;
+        }
+
+    }
+}
+
+aside {
+    width: 100%;
+    border: 1px solid black;
+    border-radius: var.$border-radius;
+    background-color: lightgrey;
+    padding: 0 0.5em;
+    margin-bottom: 0.5em;
+    .filter {
+        width: 100%;
+        @include mix.FlexBurger();
+        padding: 0.3em;
+    }
+    .input-cointainer{
+        max-width: 100%;
+        @include mix.FlexStandard(space-between);
+        flex-wrap: wrap;
+        gap: 0.5em;
+        margin-bottom: 0.3em;
+        div {
+            label {
+                cursor: pointer;
+                padding: 0.2em;
+            }
+            button {
+                padding: 0;
+            }
+            input[type='checkbox'] {
+                display: none;
+                &:checked ~ label {
+                   @include mix.LabelColorChecked();
+                }
+            }
+            input:not([type='checkbox']) {
+                width: 100%;
+            }
+        }
+        .price-container{
+            
+            .price-container-inner {
+                @include mix.FlexStandard(center);
+                gap: 2em;
+            }
+        }
+        .color-container {
+            .color-container-inner {
+                @include mix.FlexStandard(center);
+                flex-wrap: wrap;
+                gap: 0.3em;
+                label {
+                   @include mix.LabelColor();
+                   border: 1px solid black;
+                }
+                input:checked ~ label {
+                    transform: scale(var.$colorScale);
+                }
+            }
+        }
+        .rating-container {
+            width: 100%;
+            .rating {
+                margin-top: 0.3em;
+                @include mix.FlexStandard(center)
+            }
+        }
+        
+    }
+    .btn-submit{
+        @include mix.FlexStandard(center);
+        margin: 0.5em 0;
+        gap:0.5em;
+    }
+}
+
+
+.news {
+    display: flex;
+    gap: 1em;
+    input[type='checkbox']{
+        display: block;
+        &:checked{
+           @include mix.CheckBoxChecked();
+        }
+    }
+}
+
+
+@media screen and (min-width: 768px)  {
+
+    :host {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 15% 85%;
+        grid-template-areas:
+        "side main";
+    }
+
+    .accordion-body{
+        padding: 0.3em;
+    }
+    
+    
+    
+    main {
+        grid-area: main;
+        padding-left:0.5em;
+        display: block;
+        .title {
+            text-align: start;
+        }
+        section {
+            @include mix.FlexStandard(flex-start);
+            flex-direction: row;
+            flex-wrap: wrap;
+            
+            div{
+                flex: 0 0 32%;
+            }
+        }
+    }
+    
+    aside {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow-y: scroll;
+        grid-area: side;
+        padding:0.2em;
+        margin-bottom: 0;
+        @include mix.ScrollBar();
+        &::-webkit-scrollbar{
+            width: 0.4em;
+        }
+        .input-cointainer{
+            @include mix.FlexStandard(flex-start);
+            flex-wrap: wrap;
+        }
+    }
+    
+
+}
+
+.fa-star {color: white;}
+.full {color: #ffd700;}
+
+::ng-deep {
+    .custom-slider .ngx-slider .ngx-slider-bar {
+      background: #ffe4d1;
+      height: 2px;
+    }
+    .custom-slider .ngx-slider .ngx-slider-selection {
+      background: orange;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-pointer {
+      width: 8px;
+      height: 16px;
+      top: auto; /* to remove the default positioning */
+      bottom: 0;
+      background-color: #333;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-pointer:after {
+      display: none;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-bubble {
+      bottom: 14px;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-limit {
+      font-weight: bold;
+      color: orange;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-tick {
+      width: 1px;
+      height: 10px;
+      margin-left: 4px;
+      border-radius: 0;
+      background: #ffe4d1;
+      top: -1px;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-tick.ngx-slider-selected {
+      background: orange;
+    }
+  }

@@ -1,0 +1,5 @@
+@use "./style/utilities/mixin" as mix;
+
+:host {
+    @include mix.FlexBurger
+}

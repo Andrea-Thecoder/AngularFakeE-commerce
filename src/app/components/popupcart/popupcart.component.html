@@ -1,0 +1,19 @@
+<section [ngClass]="{'flip-out-ver-right': fade}"  >
+    <div class="title">
+      <h5>Prodotto aggiunto al carrello</h5>
+    </div>
+    <div class="divImg" >
+        <img src={{product.immagine}} alt={{product.nome}} title={{product.nome}}>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{product.nome}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{product.categoria}}</h6>
+        <p class="card-text">Prezzo unitario: {{product.prezzo}} €</p>
+        <p class="card-text">Quantità: {{product.quantita}}</p>
+        <p class="card-text">Totale: {{product.quantita * product.prezzo | number:'1.2-2'}}</p>
+      </div>
+      <div class="divButton">
+        <button type="button" class="btn btn-dark" (click)="returnDetail()">Continua gli acquisti</button>
+        <button type="button" class="btn btn-success" [routerLink]="['/Checkout']">Vai al checkout</button>
+      </div>
+</section>

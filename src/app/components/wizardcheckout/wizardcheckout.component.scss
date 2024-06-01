@@ -1,0 +1,272 @@
+@use "../../style/utilities/mixin" as mix ;
+@use "../../style/utilities/color" as col;
+@use "../../style/utilities/var" as var;
+
+
+
+$wizard-padding: 1.5em;
+:host {
+    width: 100%;
+    margin: 1em;
+
+
+}
+
+a[href=""] {
+    color:white;
+}
+
+.accordion{
+    margin-top: 1em;
+}
+
+article {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+
+section {
+    grid-area: wizard;
+    .title {
+        text-align: center;
+        padding:0 $wizard-padding ;
+    }
+
+    .input-inner {
+        @include mix.FlexBurger();
+        gap: 1em;
+        padding: $wizard-padding;
+        width: 100%;
+    }
+    .button-stepOne{
+        @include mix.FlexStandard(center);
+        gap: 1em;
+    }
+    
+}
+
+#stepDue {
+    padding:0 $wizard-padding;
+    .promozione{
+        @include mix.FlexBurger();
+        align-items: flex-start;
+        gap: 1em;
+        margin-bottom: 1em;
+        label{
+            position: relative;
+        }
+        input[type="checkbox"]{
+            display: none;
+        }
+        .input{
+            flex-basis: 40%;
+        }
+        .miniText{
+            font-size: 0.5rem;
+        }
+        .infoPromo{
+            position: absolute;
+            left: 20%;
+            top: 40%;
+            width: 90%;
+            background-color: rgba(0, 0, 0, 0.71);
+            color: white;
+            font-size: 0.8rem;
+            z-index: 10;
+
+        }
+    }
+    #metodiPagamento{
+        @include mix.FlexBurger();
+        align-items: flex-start;
+        .pagamento-radio{
+            padding: 1em 0;
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            p {
+                margin: 0;  
+                padding: 0;
+            }
+        }
+    }
+    .input-inner{
+        padding: 1em 0;
+    }
+    .final-button {
+        @include mix.FlexStandard(center);
+    }
+}
+
+#carrello{
+    .accordion-button{
+        @include mix.FlexStandard(flex-start);
+        gap: 1em;
+        h6{
+            margin: 0;
+            a{
+                color: black;
+                text-decoration: underline;
+            }
+        }
+    }
+    p {
+    font-weight:bold;
+    }
+}
+
+
+.card-inner {
+    @include mix.FlexStandard(space-between);
+    .card-inner-detail{
+        @include mix.FlexStandard(flex-end);
+        .card-inner-total{
+            @include mix.FlexStandard(flex-end);
+
+            margin:0 0.7em;
+        }
+    }
+}
+
+
+@media screen and (min-width: 768px){
+
+    :host {
+        display: grid;
+        grid-template-columns: calc(60% - 0.5em) calc(40% - 0.5em);
+        gap: 1em;
+        grid-template-areas: 
+        "titolo titolo"
+        "wizard recap" 
+        ;
+    }
+
+
+    form {
+        padding-left: 2em;
+    }
+    #carrello{
+        padding: 0 2em 0 1em;
+        grid-area: recap;
+        .accordion-button{
+            cursor:auto;
+            @include mix.FlexStandard(space-between);
+            h6{
+                margin: 0;
+                a{
+                    color: black;
+                    text-decoration: underline;
+                }
+            }
+        }
+        .accordion-button::after{
+            content: none;
+        }
+        p {
+        font-weight:bold;
+        }
+    }
+    .accordion{
+        margin-top:0;
+    }
+    
+    article {
+        grid-area: titolo;
+    }
+    
+    section {
+        grid-area: wizard;
+        .input-inner {
+            @include mix.FlexStandard(center);
+            flex-direction: row;
+            .mini-input{
+                width: 20%;
+            }
+        
+        }
+        
+    }
+
+    #stepDue{
+        .promozione{
+            @include mix.FlexStandard(flex-start);
+            flex-direction: row;
+            gap: 1.5em;
+            .input{
+                flex-basis: 40%;
+            }
+            .infoPromo{
+                position: absolute;
+                left: 0%;
+                top: -200%;
+            }
+        }
+        #metodiPagamento{
+            @include mix.FlexStandard(flex-start);
+            flex-direction: row;
+            gap: 2em;
+            margin-bottom: 1em;
+            .pagamento-radio{
+                height: 117px;
+                padding: 0;
+                flex-basis: 25%;
+                border: 2px solid black;
+                border-radius: var.$border-radius;
+                @include mix.FlexBurger();
+                p {
+                    margin: 0;
+                    padding: 0;
+                }
+                input[type="radio"]{
+                    display: none;
+                    &:checked ~ label{
+                        transform: scale(80%);
+                    }
+                }
+                label{
+                    transition: box-shadow 0.3s;
+                    width: 100%;
+                    height: 100%;
+                    @include mix.FlexBurger();
+                    .tipiCarta {
+                        @include mix.FlexStandard(center);
+                        gap: 0.5em;
+                    }
+                }
+                
+        
+            }
+        }
+        .input-inner{
+            padding: 0;
+            padding-bottom:1em;
+            .mini-input{
+                flex-basis: 40%;
+            }
+        }
+    }
+
+    .card-inner{
+        .card-inner-imgText{
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    article.full-grid{
+        grid-area: 1 / 1 ;
+        grid-column: 1 / 3;
+        padding: 1em 0;
+        a{
+            text-decoration: underline;
+        }
+        .final-img{
+            @include mix.FlexStandard(center);
+            margin: 1em;
+            img{
+                max-width: 15%
+            };
+        }
+    }
+}

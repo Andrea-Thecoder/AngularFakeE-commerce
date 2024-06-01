@@ -1,0 +1,13 @@
+<ng-container *ngFor="let user of utente">
+<div>
+   <h1>Benvenuto {{user.nome}} {{user.cognome}} </h1>
+    <h3>La pagina è attualmente in costruzione.</h3>
+    <h5>Ci scusiamo per il disagio</h5> 
+    <div>
+        <p>Attualmente puoi solo effettuare il:</p>
+        <button class="btn btn-dark" (click)="logout()">LogOut</button>
+    </div>
+</div>
+
+
+</ng-container>

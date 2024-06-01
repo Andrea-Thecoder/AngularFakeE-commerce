@@ -1,0 +1,51 @@
+/* use this partial in external scss as mix */
+
+@use "../../style/utilities/color" as col;
+
+
+@mixin FlexStandard($jc: center) {
+    display: flex;
+    justify-content: $jc;
+    align-items: center;
+}
+
+@mixin FlexBurger($starter: false){
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    @if not $starter { align-items: center;}
+}
+
+@mixin LabelColor($d:1.5rem) {
+    width: $d;
+    height: $d;
+    border-radius: 50%;
+    margin: 0;
+    padding: 0;
+}
+
+@mixin LabelColorChecked(){
+    background: col.$bg-Header;
+    border: 1px solid black;
+    color: black
+}
+
+@mixin CheckBoxChecked(){
+    background-color: #343a40;
+    border-color: #343a40;
+    color: white;
+}
+
+
+@mixin ScrollBar(){
+    &::-webkit-scrollbar {
+        background: col.$bg-Header;
+        background: col.$bg-Header-gradient;
+        height: 0.4em;
+      }
+    &::-webkit-scrollbar-thumb {
+        background-color: black; 
+        border-radius: 0.5em;
+        height: 2px !important;
+    }
+}

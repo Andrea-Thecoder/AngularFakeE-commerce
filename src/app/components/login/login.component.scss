@@ -1,0 +1,34 @@
+@use "../../style/utilities/mixin" as mix ;
+@use "../../style/utilities/color" as col;
+@use "../../style/utilities/var" as var;
+
+
+
+:host {
+    padding: 1.5em;
+    
+}
+
+h4{
+    text-align: center;
+}
+
+form {
+    padding: 1em;
+    background-color: #EEEEEE;
+
+    input[type="checkbox"]:checked{
+        @include mix.CheckBoxChecked();
+    }
+    .button-container{
+        @include mix.FlexStandard(center);
+    }
+    .img-container{
+        @include mix.FlexStandard(center);
+        max-width: 300px;
+        img {
+            width: 80%;
+            padding: 2em;
+        }
+    }
+}

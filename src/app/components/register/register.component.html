@@ -1,0 +1,120 @@
+<form [formGroup]="registerForm" (ngSubmit)="submit()">
+    <div class="img-container">
+        <img src={{utilities.logourl}} alt="Logo LabAir">
+    </div>
+    <ng-container *ngIf="!showThanks else RegistationDone" >
+    <div>
+        <h4>Registrati a LabAir</h4>
+    </div>
+        <div class="input-group flex-nowrap form-outline mb-4">
+            <input type="text" class="form-control" placeholder="Nome" formControlName="nome" name="nome" [ngClass]="{'border-danger':registerForm.get('nome').invalid && registerForm.get('nome').touched}">
+            <span class="input-group-text" >
+              <ng-container *ngIf="registerForm.get('nome').invalid && registerForm.get('nome').touched">
+              <i class="fas fa-times text-danger" 
+                [attr.title]="registerForm.get('nome').hasError('required') ? 'Campo mancante' : 'Campo errato'"></i>
+            </ng-container>
+            <ng-container *ngIf="(!registerForm.get('nome').invalid) && registerForm.get('nome').touched">
+              <i class="fas fa-check text-success"
+              [attr.title]="registerForm.get('nome').valid ? 'Successo' : ''"></i>
+            </ng-container>
+            </span>
+          </div>
+          <div class="input-group flex-nowrap form-outline mb-4">
+            <input type="text" class="form-control" placeholder="Cognome" formControlName="cognome" name="cognome" [ngClass]="{'border-danger':registerForm.get('cognome').invalid && registerForm.get('cognome').touched}">
+            <span class="input-group-text" >
+              <ng-container *ngIf="registerForm.get('cognome').invalid && registerForm.get('cognome').touched">
+                <i class="fas fa-times text-danger" 
+                  [attr.title]="registerForm.get('cognome').hasError('required') ? 'Campo mancante' : 'Campo errato'"></i>
+              </ng-container>
+              <ng-container *ngIf="(!registerForm.get('cognome').invalid) && registerForm.get('cognome').touched">
+                <i class="fas fa-check text-success" 
+                [attr.title]="registerForm.get('cognome').valid ? 'Successo' : ''"></i>
+              </ng-container>
+            </span>
+          </div>
+
+    <div class="input-group flex-nowrap form-outline mb-4" >
+        <input type="text" class="form-control" placeholder="Indirizzo Email" formControlName="email" name="email" [ngClass]="{'border-danger':registerForm.get('email').invalid && registerForm.get('email').touched}">
+        <span class="input-group-text" >
+          <ng-container *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched">
+          <i class="fas fa-times text-danger" 
+            [attr.title]="registerForm.get('email').hasError('required') ? 'Campo mancante' : 'Campo errato'"></i>
+        </ng-container>
+        <ng-container *ngIf="(!registerForm.get('email').invalid) && registerForm.get('email').touched">
+          <i class="fas fa-check text-success"
+          [attr.title]="registerForm.get('email').valid ? 'Successo' : ''"></i>
+        </ng-container>
+        </span>
+      </div>
+    <div class="input-group flex-nowrap form-outline ">
+        <p>La password deve essere compresa tra 8 e 16 caratteri, avere almeno una maiuscola, un numero ed un carattere speciale.</p>
+    </div>
+    <div class="input-group flex-nowrap form-outline mb-4">
+        <input type="password" class="form-control" placeholder="Password" formControlName="password" name="password" [ngClass]="{'border-danger':registerForm.get('password').invalid && registerForm.get('password').touched}">
+        <span class="input-group-text" >
+          <ng-container *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched">
+          <i class="fas fa-times text-danger" 
+            [attr.title]="registerForm.get('password').hasError('required') ? 'Campo mancante' : 'Campo errato'"></i>
+        </ng-container>
+        <ng-container *ngIf="(!registerForm.get('password').invalid) && registerForm.get('password').touched">
+          <i class="fas fa-check text-success"
+          [attr.title]="registerForm.get('password').valid ? 'Successo' : ''"></i>
+        </ng-container>
+        </span>
+      </div>
+      <div class="input-group flex-nowrap form-outline mb-4">
+        <input type="password" class="form-control" placeholder="Ripeti la Password" formControlName="passwordCheck" name="passwordCheck" [ngClass]="{'border-danger':registerForm.get('passwordCheck').errors?.passwordDiverse}">
+        <span class="input-group-text" >
+        <ng-container *ngIf="(!registerForm.get('passwordCheck').invalid) && registerForm.get('passwordCheck').touched && !registerForm.get('passwordCheck').errors?.passwordDiverse">
+          <i class="fas fa-check text-success"
+          [attr.title]="registerForm.get('passwordCheck').valid ? 'Corrisponde' : ''"></i>
+        </ng-container>
+        <ng-container *ngIf="registerForm.get('passwordCheck').errors?.passwordDiverse">
+          <i class="fas fa-exclamation-circle text-danger" title="Le password non corrispondono!"></i>
+        </ng-container>
+        </span>
+      </div>
+      <div class="row mb-4">
+      <div class="col">
+        <!-- Checkbox -->
+        <div class="d-flex gap-2">
+          <input class="form-check-input" type="checkbox" name="privacyCheck" id="privacyCheck" formControlName="privacyCheck" [ngClass]="{'border-danger':registerForm.get('privacyCheck').invalid && registerForm.get('privacyCheck').touched}">
+          <label class="form-check-label" for="privacyCheck" > Acconsento all'informativa sulla Privacy</label>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Submit button -->
+    <div class="button-container"><button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-block mb-4">Registrati</button></div>
+    <div class="text-center">
+      <p>Hai già un account? <a [routerLink]="['/Login']" class="text-decoration-underline">Accedi
+      </a></p>
+      <p>od accedi con:</p>
+      <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating btn-dark mx-1">
+        <i class="fab fa-facebook-f"></i>
+      </button>
+  
+      <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating btn-dark mx-1">
+        <i class="fab fa-google"></i>
+      </button>
+  
+      <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating btn-dark mx-1">
+        <i class="fab fa-twitter"></i>
+      </button>
+    </div>
+  </ng-container>
+  <ng-template #RegistationDone>
+    <div>
+      <h4>Registrazione avvenuta con Successo</h4>
+    </div>
+    <div>
+      <p class="normal text-center">Ora potrai goderti tutti i vantaggi di un membro LabAir!</p>
+      <p class="normal text-center">Inizia subito accedendo</p>
+      <div class="button-container"><button type="button" [routerLink]="['/Login']"  class="btn btn-dark btn-block mb-1">Area Riservata</button></div>
+      <p class="normal text-center">Oppure</p>
+      <div class="button-container"><button type="button" [routerLink]="['/Home']" class="btn btn-dark btn-block">Torna alla Home</button></div>
+    </div>
+  </ng-template>
+  </form>
+
+
